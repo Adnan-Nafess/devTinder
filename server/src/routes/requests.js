@@ -11,19 +11,17 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
     const status = req.params.status;
 
     const allowedStatus = ["ignored", "interested"];
+    if (!allowedStatus.includes(status)) {
+      return res.status(400).json({ message: `Invalid status type: ${status}` });
+    }
 
-    if(!allowedStatus.includes(status)) {
-      return res.status(400).json({
-        message: "Invalid status type: " + status
-      })
-    };
+    if (fromUserId.toString() === toUserId.toString()) {
+      return res.status(400).json({ message: "You cannot send a request to yourself!" });
+    }
 
     const toUser = await User.findById(toUserId);
-
-    if(!toUser) {
-      return res.status(404).json({
-        message: "User not found!!",
-      });
+    if (!toUser) {
+      return res.status(404).json({ message: "User not found!" });
     }
 
     const existingConnectionRequest = await ConnectionRequest.findOne({
@@ -33,8 +31,10 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
       ],
     });
 
-    if(existingConnectionRequest) {
-      return res.status(400).send({ message: "Connection Request Already Exists!!" })
+    if (existingConnectionRequest) {
+      return res.status(400).json({
+        message: `You already ${existingConnectionRequest.status} this user!`,
+      });
     }
 
     const connectionRequest = new ConnectionRequest({
@@ -45,16 +45,15 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 
     const data = await connectionRequest.save();
 
-    res.json({
+    res.status(200).json({
       message: `${req.user.firstName} ${req.user.lastName} is ${status} in to ${toUser.firstName} ${toUser.lastName}`,
       data,
     });
-
-  }catch(err) {
-    res.status(400).send("Error: " + err.message);
-
-  };
+  } catch (err) {
+    res.status(500).json({ message: "Error: " + err.message });
+  }
 });
+
 
 
 requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, res) => {

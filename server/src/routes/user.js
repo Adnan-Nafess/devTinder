@@ -12,7 +12,7 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
     const connectionRequest = await ConnectionRequest.find({
       toUserId: loggedInUser._id,
       status: "interested",
-    }).populate("fromUserId", "firstName lastName age gender about skills");
+    }).populate("fromUserId", "firstName lastName age gender about skills photoUrl");
 
     res.json({
       message: "Data fetched successfully",
@@ -34,25 +34,26 @@ userRouter.get("/user/connection", userAuth, async (req, res) => {
         { toUserId: loggedInUser._id, status: "accepted" },
         { fromUserId: loggedInUser._id, status: "accepted" }
       ]
-    }).populate("fromUserId", "firstName lastName age gender about skills")
-      .populate("toUserId", "firstName lastName age gender about skills")
+    })
+    .populate("fromUserId", "firstName lastName age gender about skills photoUrl")
+    .populate("toUserId", "firstName lastName age gender about skills photoUrl");
 
     const data = connectionRequest.map((row) => {
-      if(row.fromUserId._id.toString() === loggedInUser._id.toString()) {
-        return row.toUserId;
-      }
-      return row.fromUserId;
+      return row.fromUserId._id.toString() === loggedInUser._id.toString()
+        ? row.toUserId
+        : row.fromUserId;
     });
 
     res.json({
-      message: "Connection found successfully",
-      data: connectionRequest,
+      message: "Connections found successfully",
+      data,
     });
 
-  }catch (err) {
+  } catch (err) {
     res.status(400).send({ message: err.message });
   }
 });
+
 
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {
@@ -80,7 +81,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         { _id: { $nin: Array.from(hiddenUsersFromFeed) }},
         { _id: { $ne: loggedInUser._id }},
       ], 
-    }).select("firstName lastName age gender about skills").skip(skip).limit(limit);
+    }).select("firstName lastName age gender about skills photoUrl").skip(skip).limit(limit);
 
     res.send(users);
 

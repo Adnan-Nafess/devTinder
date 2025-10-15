@@ -12,7 +12,6 @@ authRouter.post("/signup", async (req, res) => {
 
     const { firstName, lastName, emailId, password } = req.body;
 
-    // Check if email already exists
     const existingUser = await User.findOne({ emailId });
     if (existingUser) {
       return res.status(400).json({ error: "Email already registered" });
@@ -27,12 +26,22 @@ authRouter.post("/signup", async (req, res) => {
       password: hashedPassword,
     });
 
-    await user.save();
-    res.status(201).json({ message: "User created successfully" });
+    const saveduser = await user.save();
+
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRY || "7d",
+    });
+
+    res.cookie("token", token, {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    })
+    
+    res.status(201).json({ message: "User created successfully", data: saveduser });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
+
 
 // 🟢 Login
 authRouter.post("/login", async (req, res) => {
@@ -60,7 +69,7 @@ authRouter.post("/login", async (req, res) => {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
     });
 
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ user, token });
   } catch (err) {
     res.status(500).json({ error: "Login failed: " + err.message });
   }
@@ -72,6 +81,7 @@ authRouter.post("/logout", (req, res) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
+    path: "/",
     expires: new Date(0),
   });
   res.status(200).json({ message: "Logout successful" });

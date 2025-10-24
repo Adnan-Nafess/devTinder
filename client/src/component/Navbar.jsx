@@ -66,6 +66,9 @@ const Navbar = () => {
                 <Link to="/request" className="hover:bg-gray-100">Request</Link>
               </li>
               <li>
+                <Link to="/premium" className="hover:bg-gray-100">Premium</Link>
+              </li>
+              <li>
                 <button
                   onClick={handleLogout}
                   className="w-full text-left text-red-500 hover:bg-red-50 px-2 py-1 rounded"
@@ -104,6 +107,9 @@ const Navbar = () => {
               </li>
               <li>
                 <Link to="/request" className="hover:bg-gray-100">Request</Link>
+              </li>
+              <li>
+                <Link to="/premium" className="hover:bg-gray-100">Premium</Link>
               </li>
               <li>
                 <button

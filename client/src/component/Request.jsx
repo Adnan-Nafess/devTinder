@@ -87,13 +87,13 @@ const reviewRequest = async (status, requestId) => {
                 <div className="flex justify-between gap-4">
                   <button
                     onClick={() => reviewRequest("rejected", user._id)}
-                    className="w-1/2 py-2 rounded-full bg-pink-700 text-white font-semibold hover:bg-pink-900 transition"
+                    className="w-1/2 py-2 rounded-full bg-pink-700 text-white font-semibold cursor-pointer hover:bg-pink-900 transition"
                   >
                     ❌ Reject
                   </button>
                   <button
                     onClick={() => reviewRequest("accepted", user._id)}
-                    className="w-1/2 py-2 rounded-full bg-indigo-700 text-white font-semibold hover:bg-indigo-900 transition"
+                    className="w-1/2 py-2 rounded-full bg-indigo-700 text-white font-semibold cursor-pointer hover:bg-indigo-900 transition"
                   >
                     ❤️ Accept
                   </button>

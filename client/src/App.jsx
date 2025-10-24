@@ -7,6 +7,7 @@ import store from "./redux/store";
 import Feed from "./component/Feed";
 import Connections from "./component/Connections";
 import Request from "./component/Request";
+import Premium from "./component/Premium";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/connections" element={<Connections />} />
             <Route path="/request" element={<Request />} />
+            <Route path="/premium" element={<Premium />} />
           </Route>
         </Routes>
       </BrowserRouter>

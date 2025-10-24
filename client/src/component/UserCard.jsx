@@ -56,13 +56,13 @@ const UserCard = ({ user }) => {
           <div className="flex justify-between gap-4">
             <button
               onClick={() => handleSendRequest("ignored", _id)}
-              className="w-1/2 py-2 rounded-full bg-pink-700 text-white font-bold hover:bg-pink-900 transition"
+              className="w-1/2 py-2 rounded-full cursor-pointer bg-pink-700 text-white font-bold hover:bg-pink-900 transition"
             >
               ❌ Ignore
             </button>
             <button
               onClick={() => handleSendRequest("interested", _id)}
-              className="w-1/2 py-2 rounded-full bg-indigo-700 text-white font-bold hover:bg-indigo-900 transition"
+              className="w-1/2 py-2 rounded-full bg-indigo-700 cursor-pointer text-white font-bold hover:bg-indigo-900 transition"
             >
               ❤️ Interested
             </button>

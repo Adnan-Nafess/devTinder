@@ -6,6 +6,8 @@ const cors = require("cors");
 const http = require("http");
 const initializeSocket = require("./utils/socket");
 
+app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({

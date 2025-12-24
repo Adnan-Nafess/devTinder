@@ -9,7 +9,10 @@ const initializeSocket = require("./utils/socket");
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [ 
+    "http://localhost:5173",
+    "https://dev-tinder-bice-three.vercel.app"
+  ],
   credentials: true,
 }))
 connectDB();

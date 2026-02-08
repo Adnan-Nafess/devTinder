@@ -13,7 +13,7 @@ const Profile = () => {
 
   return (
     user && (
-      <div>
+      <div className="max-w-4xl mx-auto px-2 sm:px-4">
         <EditProfile user={user} onUpdate={handleUpdate} />
       </div>
     )

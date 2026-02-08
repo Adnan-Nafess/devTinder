@@ -78,9 +78,11 @@ const EditProfile = ({ user, onUpdate }) => {
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
           Edit Profile
         </h2>
-        {message && <p className="mb-4 text-green-600 dark:text-green-400">{message}</p>}
+        {message && (
+          <p className="mb-4 text-green-600 dark:text-green-400">{message}</p>
+        )}
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <input
               type="text"
               name="firstName"
@@ -157,8 +159,12 @@ const EditProfile = ({ user, onUpdate }) => {
 
       {/* Preview Section */}
       <div className="flex-1 flex justify-center items-start">
-        <div className="card bg-white dark:bg-gray-800 w-80 sm:w-96 shadow-xl rounded-xl overflow-hidden">
-          <figure className="h-96 w-full overflow-hidden">
+        <div
+          className="card bg-white dark:bg-gray-800
+  w-full max-w-sm sm:max-w-md
+  shadow-xl rounded-xl overflow-hidden"
+        >
+          <figure className="h-72 sm:h-80 md:h-96 w-full overflow-hidden">
             <img
               src={formData.photoUrl || "/default-avatar.png"}
               alt={`${formData.firstName} ${formData.lastName}`}
@@ -172,7 +178,9 @@ const EditProfile = ({ user, onUpdate }) => {
             <span className="text-sm text-gray-500 dark:text-gray-400 capitalize mb-2">
               {formData.gender}
             </span>
-            <p className="text-gray-700 dark:text-gray-300 mb-3">{formData.about}</p>
+            <p className="text-gray-700 dark:text-gray-300 mb-3">
+              {formData.about}
+            </p>
             <div className="flex flex-wrap gap-2 mb-3">
               {formData.skills.split(",").map((skill, idx) => (
                 <span

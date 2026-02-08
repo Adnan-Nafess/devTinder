@@ -88,9 +88,22 @@ const Chat = () => {
   };
 
   return (
-    <div className="w-1/2 mx-auto border border-gray-600 m-5 h-[70vh] flex flex-col">
-      <h1 className="p-5 border-b border-gray-600">Chat</h1>
-      <div className="flex-1 overflow-scroll p-5">
+    <div
+      className="
+    w-full sm:w-[90%] md:w-2/3 lg:w-1/2
+    mx-auto
+    border border-gray-600
+    my-3
+    h-[85vh] sm:h-[75vh]
+    flex flex-col
+    rounded-xl
+    overflow-hidden"
+    >
+      <h1 className="p-3 sm:p-5 border-b border-gray-600 text-center font-semibold">
+        Chat
+      </h1>
+
+      <div className="flex-1 overflow-y-auto p-3 sm:p-5 space-y-2">
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -98,22 +111,25 @@ const Chat = () => {
               "chat " + (msg.senderId === userId ? "chat-end" : "chat-start")
             }
           >
-            <div className="chat-header">
-              {`${msg.firstName} ${msg.lastName}`}
-              <time className="text-xs opacity-50">2 hour ago</time>
+            <div className="chat-header text-xs sm:text-sm">
+              {msg.firstName} {msg.lastName}
             </div>
-            <div className="chat-bubble">{msg.text}</div>
-            <div className="chat-footer opacity-50">Seen</div>
+            <div className="chat-bubble max-w-[85%]">{msg.text}</div>
           </div>
         ))}
       </div>
-      <div className="p-5 border-t border-gray-600 flex items-center gap-2">
+
+      <div className="p-2 sm:p-4 border-t border-gray-600 flex gap-2">
         <input
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          className="flex-1 border border-gray-500 text-white p-2"
-        ></input>
-        <button onClick={sendMessage} className="btn btn-primary">
+          className="flex-1 border border-gray-500 p-2 rounded text-white"
+          placeholder="Type a message..."
+        />
+        <button
+          onClick={sendMessage}
+          className="btn btn-primary btn-sm sm:btn-md"
+        >
           Send
         </button>
       </div>

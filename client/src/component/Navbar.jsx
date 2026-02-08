@@ -11,8 +11,8 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${BASE_URL}/logout`, {},  { withCredentials: true });
-      dispatch(removeUser()); 
+      await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
+      dispatch(removeUser());
       navigate("/login");
     } catch (err) {
       console.error(err);
@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-md px-4">
+    <nav className="navbar sticky top-0 z-50 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-md px-2 sm:px-4">
       {/* Left side (Logo) */}
       <div className="flex-1">
         <Link
@@ -54,19 +54,28 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-white text-gray-700 rounded-lg mt-3 w-52 p-2 shadow-lg z-[999]"
             >
               <li>
-                <Link to="/profile" className="flex justify-between items-center hover:bg-gray-100">
+                <Link
+                  to="/profile"
+                  className="flex justify-between items-center hover:bg-gray-100"
+                >
                   Profile{" "}
                   <span className="badge badge-primary text-white">New</span>
                 </Link>
               </li>
               <li>
-                <Link to="/connections" className="hover:bg-gray-100">Connections</Link>
+                <Link to="/connections" className="hover:bg-gray-100">
+                  Connections
+                </Link>
               </li>
               <li>
-                <Link to="/request" className="hover:bg-gray-100">Request</Link>
+                <Link to="/request" className="hover:bg-gray-100">
+                  Request
+                </Link>
               </li>
               <li>
-                <Link to="/premium" className="hover:bg-gray-100">Premium</Link>
+                <Link to="/premium" className="hover:bg-gray-100">
+                  Premium
+                </Link>
               </li>
               <li>
                 <button
@@ -100,16 +109,24 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-white text-gray-700 rounded-lg mt-3 w-44 p-2 shadow-lg z-[999]"
             >
               <li>
-                <Link to="/profile" className="hover:bg-gray-100">Profile</Link>
+                <Link to="/profile" className="hover:bg-gray-100">
+                  Profile
+                </Link>
               </li>
               <li>
-                <Link to="/connections" className="hover:bg-gray-100">Connections</Link>
+                <Link to="/connections" className="hover:bg-gray-100">
+                  Connections
+                </Link>
               </li>
               <li>
-                <Link to="/request" className="hover:bg-gray-100">Request</Link>
+                <Link to="/request" className="hover:bg-gray-100">
+                  Request
+                </Link>
               </li>
               <li>
-                <Link to="/premium" className="hover:bg-gray-100">Premium</Link>
+                <Link to="/premium" className="hover:bg-gray-100">
+                  Premium
+                </Link>
               </li>
               <li>
                 <button

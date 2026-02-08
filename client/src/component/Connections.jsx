@@ -11,7 +11,9 @@ const Connections = () => {
 
   const fetchConnection = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/user/connection`, { withCredentials: true });
+      const res = await axios.get(`${BASE_URL}/user/connection`, {
+        withCredentials: true,
+      });
       dispatch(addConnections(res.data.data));
     } catch (err) {
       console.log(err);
@@ -39,14 +41,15 @@ const Connections = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {connections.map((user) => {
-          const { firstName, lastName, age, gender, about, photoUrl, _id } = user;
+          const { firstName, lastName, age, gender, about, photoUrl, _id } =
+            user;
           return (
             <div
               key={_id}
               className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition duration-300"
             >
               {/* 🖼 Profile Photo */}
-              <div className="relative h-96">
+              <div className="relative h-72 sm:h-80 md:h-96">
                 <img
                   src={photoUrl || "/default-avatar.png"}
                   alt={`${firstName} ${lastName}`}
@@ -56,7 +59,9 @@ const Connections = () => {
                   <h2 className="text-2xl font-bold">
                     {firstName} {lastName}, {age}
                   </h2>
-                  <span className="capitalize text-sm opacity-90">{gender}</span>
+                  <span className="capitalize text-sm opacity-90">
+                    {gender}
+                  </span>
                 </div>
               </div>
 
@@ -65,7 +70,9 @@ const Connections = () => {
                 <p className="text-gray-800 dark:text-gray-200 text-sm mb-4 line-clamp-3">
                   {about || "No bio provided yet."}
                 </p>
-                <Link to={"/chat/"+_id}><button className="btn btn-primary">Chat</button></Link>
+                <Link to={"/chat/" + _id}>
+                  <button className="btn btn-primary">Chat</button>
+                </Link>
               </div>
             </div>
           );

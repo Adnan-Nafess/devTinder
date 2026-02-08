@@ -7,7 +7,8 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node nodemon src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

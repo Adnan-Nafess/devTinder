@@ -32,9 +32,9 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <Navbar />
-      <main className="flex-1 px-2 sm:px-4 md:px-6">
+      <main className="min-h-[calc(100vh-64px)] w-full">
         <Outlet />
       </main>
     </div>
